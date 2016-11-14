@@ -13,9 +13,9 @@ class NetworkController {
     func makeWebServiceCall(toUrl: String, method: String, callback : (response: NSData?, error: NSError?) -> Void){
         var request : NSURLRequest?
         switch method {
-        case "POST":
+        case AppConstants.httpPostMethod:
             break
-        case "GET":
+        case AppConstants.httpGetMethod:
             request = NSURLRequest(URL: NSURL(string: toUrl)!)
             break
         default:
@@ -28,14 +28,4 @@ class NetworkController {
     }
 }
 
-import Foundation
 
-extension String {
-    func sliceFrom(start: String, to: String) -> String? {
-        return (rangeOfString(start)?.endIndex).flatMap { sInd in
-            (rangeOfString(to, range: sInd..<endIndex)?.startIndex).map { eInd in
-                substringWithRange(sInd..<eInd)
-            }
-        }
-    }
-}

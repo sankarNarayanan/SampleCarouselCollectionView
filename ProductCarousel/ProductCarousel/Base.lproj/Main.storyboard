@@ -19,7 +19,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="images" translatesAutoresizingMaskIntoConstraints="NO" id="BlE-E0-CWn">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="natural" translatesAutoresizingMaskIntoConstraints="NO" id="BlE-E0-CWn">
                                 <rect key="frame" x="0.0" y="20" width="600" height="600"/>
                             </imageView>
                             <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pP2-fl-6hX">
@@ -29,7 +29,7 @@
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="UE2-KS-7RC">
-                                            <rect key="frame" x="10" y="138" width="590" height="312"/>
+                                            <rect key="frame" x="10" y="120" width="590" height="344"/>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                             <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="1l5-gN-z2H">
                                                 <size key="itemSize" width="204" height="299.5"/>
@@ -39,7 +39,7 @@
                                             </collectionViewFlowLayout>
                                             <cells>
                                                 <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ContainerCell" id="OOw-yL-bUZ" customClass="ProductCollectionCell" customModule="ProductCarousel" customModuleProvider="target">
-                                                    <rect key="frame" x="0.0" y="6.5" width="204" height="299.5"/>
+                                                    <rect key="frame" x="0.0" y="22.5" width="204" height="299.5"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                                         <rect key="frame" x="0.0" y="0.0" width="204" height="299.5"/>
@@ -110,29 +110,30 @@
                                                 <outlet property="delegate" destination="PbD-8T-MJ5" id="oZp-Ij-c8y"/>
                                             </connections>
                                         </collectionView>
-                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Please select Category" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gj1-qv-xYX">
-                                            <rect key="frame" x="20" y="58" width="560" height="30"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                            <textInputTraits key="textInputTraits"/>
-                                        </textField>
                                         <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="d8j-L3-dFT">
                                             <rect key="frame" x="100" y="489" width="400" height="37"/>
                                         </pageControl>
+                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Please select Category" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gj1-qv-xYX">
+                                            <rect key="frame" x="20" y="50" width="560" height="30"/>
+                                            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <textInputTraits key="textInputTraits"/>
+                                        </textField>
                                     </subviews>
                                     <constraints>
                                         <constraint firstAttribute="trailing" secondItem="UE2-KS-7RC" secondAttribute="trailing" id="9eR-6y-XQq"/>
                                         <constraint firstItem="gj1-qv-xYX" firstAttribute="leading" secondItem="UP6-fh-4tS" secondAttribute="leading" constant="20" id="GyC-t0-Nbm"/>
                                         <constraint firstAttribute="trailing" secondItem="d8j-L3-dFT" secondAttribute="trailing" constant="100" id="MT1-xg-too"/>
-                                        <constraint firstItem="d8j-L3-dFT" firstAttribute="top" secondItem="UE2-KS-7RC" secondAttribute="bottom" constant="39" id="Nv3-2d-ykX"/>
+                                        <constraint firstItem="d8j-L3-dFT" firstAttribute="top" secondItem="UE2-KS-7RC" secondAttribute="bottom" constant="25" id="Nv3-2d-ykX"/>
                                         <constraint firstAttribute="bottom" secondItem="d8j-L3-dFT" secondAttribute="bottom" constant="74" id="P7d-JF-5O0"/>
                                         <constraint firstItem="UE2-KS-7RC" firstAttribute="leading" secondItem="UP6-fh-4tS" secondAttribute="leading" constant="10" id="Srv-v1-Us9"/>
-                                        <constraint firstItem="gj1-qv-xYX" firstAttribute="top" secondItem="UP6-fh-4tS" secondAttribute="top" constant="58" id="YvD-Yd-fAT"/>
-                                        <constraint firstItem="UE2-KS-7RC" firstAttribute="top" secondItem="gj1-qv-xYX" secondAttribute="bottom" constant="50" id="aQu-Sd-Xw0"/>
+                                        <constraint firstItem="gj1-qv-xYX" firstAttribute="top" secondItem="UP6-fh-4tS" secondAttribute="top" constant="50" id="YvD-Yd-fAT"/>
+                                        <constraint firstItem="UE2-KS-7RC" firstAttribute="top" secondItem="gj1-qv-xYX" secondAttribute="bottom" constant="40" id="aQu-Sd-Xw0"/>
                                         <constraint firstAttribute="trailing" secondItem="gj1-qv-xYX" secondAttribute="trailing" constant="20" id="tGS-7a-bMd"/>
                                         <constraint firstItem="d8j-L3-dFT" firstAttribute="leading" secondItem="UP6-fh-4tS" secondAttribute="leading" constant="100" id="ubu-ol-Aet"/>
                                     </constraints>
                                 </view>
-                                <blurEffect style="light"/>
+                                <blurEffect style="dark"/>
                             </visualEffectView>
                         </subviews>
                         <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
@@ -161,7 +162,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="images" width="168" height="300"/>
         <image name="natural" width="1440" height="2057"/>
     </resources>
 </document>

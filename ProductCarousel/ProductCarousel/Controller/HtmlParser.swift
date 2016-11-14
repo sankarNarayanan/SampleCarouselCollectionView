@@ -8,6 +8,21 @@
 
 import Foundation
 
+struct HtmlParserConstants {
+    static let categoryNameSearchKey = "//div[@class = 'col-sm-9']"
+    static let productBaseSearchKey = "//div[@class = 'mask']"
+    static let ulKey = "ul"
+    static let liKey = "li"
+    static let headingKey = "h2"
+    static let anchorKey = "a"
+    static let imgHolderClassKey = "img-holder"
+    static let imgKey = "img"
+    static let imgSrcKey = "src"
+    static let spanKey = "span"
+    static let classSearchSpec = "title text-uppercase"
+    static let strongKey = "strong"
+}
+
 class HtmlParser: NSObject {
     
     func parseHtmlData(htmlData : NSData) -> [CategoryModel]{
@@ -24,23 +39,23 @@ class HtmlParser: NSObject {
         
         //To get the category names
         var categoryNamesArray : [String] = [String]()
-        if let categoryNamesList = doc.searchWithXPathQuery("//div[@class = 'col-sm-9']") as? [TFHppleElement]{
+        if let categoryNamesList = doc.searchWithXPathQuery(HtmlParserConstants.categoryNameSearchKey) as? [TFHppleElement]{
             for categoryName in categoryNamesList{
-                if let categoryFirstChild = categoryName.firstChildWithTagName("h2"){
+                if let categoryFirstChild = categoryName.firstChildWithTagName(HtmlParserConstants.headingKey){
                     categoryNamesArray.append(categoryFirstChild.content)
                 }
             }
         }
         
         //To get product models in category
-        if let baseElements = doc.searchWithXPathQuery("//div[@class = 'mask']") as? [TFHppleElement]{
+        if let baseElements = doc.searchWithXPathQuery(HtmlParserConstants.productBaseSearchKey) as? [TFHppleElement]{
             var counter = 0
             for rootElement in baseElements {
-                let listParent = rootElement.firstChildWithTagName("ul")
-                let listChildren = listParent.childrenWithTagName("li")
+                let listParent = rootElement.firstChildWithTagName(HtmlParserConstants.ulKey)
+                let listChildren = listParent.childrenWithTagName(HtmlParserConstants.liKey)
                 var productArray:[ProductModel] = [ProductModel]()
                 for listElement in listChildren{
-                    let listAnchors = listElement.childrenWithTagName("a")
+                    let listAnchors = listElement.childrenWithTagName(HtmlParserConstants.anchorKey)
                     //Variables to be initialized
                     var imageLink = ""
                     var productName = ""
@@ -48,25 +63,25 @@ class HtmlParser: NSObject {
                     var discountedPrice = ""
                     for anchorChild in listAnchors{
                         //To get image link
-                        if let immediateImageHolder = anchorChild.firstChildWithClassName("img-holder"){
-                            if let actualImageTag = immediateImageHolder.firstChildWithTagName("img"){
-                                imageLink = actualImageTag.objectForKey("src")
+                        if let immediateImageHolder = anchorChild.firstChildWithClassName(HtmlParserConstants.imgHolderClassKey){
+                            if let actualImageTag = immediateImageHolder.firstChildWithTagName(HtmlParserConstants.imgKey){
+                                imageLink = actualImageTag.objectForKey(HtmlParserConstants.imgSrcKey)
                             }
                         }
                         //To get product Description
-                        if let productNameSpanHolder = anchorChild.firstChildWithTagName("span"){
+                        if let productNameSpanHolder = anchorChild.firstChildWithTagName(HtmlParserConstants.spanKey){
                             productName = productNameSpanHolder.content
                         }
                         
                         
                     }
                     //To get store details
-                    if let storeTitleTag = listElement.firstChildWithClassName("title text-uppercase"){
+                    if let storeTitleTag = listElement.firstChildWithClassName(HtmlParserConstants.classSearchSpec){
                         storeTitle = storeTitleTag.content
                     }
                     //To get price
-                    if let basePriceTag = listElement.firstChildWithTagName("strong"){
-                        if let discountedPriceSpanTag = basePriceTag.firstChildWithTagName("span"){
+                    if let basePriceTag = listElement.firstChildWithTagName(HtmlParserConstants.strongKey){
+                        if let discountedPriceSpanTag = basePriceTag.firstChildWithTagName(HtmlParserConstants.spanKey){
                             discountedPrice = discountedPriceSpanTag.content
                         }
                     }

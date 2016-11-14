@@ -22,7 +22,7 @@ class LandingViewController: UIViewController, UICollectionViewDelegate, UIColle
     override func viewDidLoad() {
         UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.Default
         super.viewDidLoad()
-        self.nController.makeWebServiceCall("http://www.landmarkshops.com", method: "GET", callback: {(response: NSData?, error: NSError?) -> Void in
+        self.nController.makeWebServiceCall(AppConstants.baseUrl, method: AppConstants.httpGetMethod, callback: {(response: NSData?, error: NSError?) -> Void in
             if (response != nil){
                 dispatch_async(dispatch_get_main_queue()) {
                     self.setUpCarousel(response!)
@@ -52,9 +52,9 @@ class LandingViewController: UIViewController, UICollectionViewDelegate, UIColle
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("ContainerCell", forIndexPath: indexPath) as! ProductCollectionCell
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(AppConstants.containerCell, forIndexPath: indexPath) as! ProductCollectionCell
         let currentProduct = self.productModels![indexPath.row]
-        self.nController.makeWebServiceCall(currentProduct.imageLink!, method: "GET", callback: {(response: NSData?, error: NSError?) -> Void in
+        self.nController.makeWebServiceCall(currentProduct.imageLink!, method: AppConstants.httpGetMethod , callback: {(response: NSData?, error: NSError?) -> Void in
             if ((response) != nil) {
                 dispatch_async(dispatch_get_main_queue()) {
                     cell.productImage.image = UIImage(data: response!)
@@ -121,9 +121,9 @@ class LandingViewController: UIViewController, UICollectionViewDelegate, UIColle
         toolBar.barStyle = UIBarStyle.Default
         toolBar.translucent = true
         toolBar.sizeToFit()
-        let doneButton = UIBarButtonItem(title: "Done", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(LandingViewController.displayproductForCategory))
+        let doneButton = UIBarButtonItem(title: AppConstants.doneBtnTitle, style: UIBarButtonItemStyle.Plain, target: self, action: #selector(LandingViewController.displayproductForCategory))
         let spaceButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.FlexibleSpace, target: nil, action: nil)
-        let cancelButton = UIBarButtonItem(title: "Cancel", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(LandingViewController.cancelAction))
+        let cancelButton = UIBarButtonItem(title: AppConstants.cancelBtnTitle, style: UIBarButtonItemStyle.Plain, target: self, action: #selector(LandingViewController.cancelAction))
         toolBar.setItems([cancelButton, spaceButton, doneButton], animated: false)
         toolBar.userInteractionEnabled = true
         self.pickerTextField.inputAccessoryView = toolBar
@@ -141,7 +141,7 @@ class LandingViewController: UIViewController, UICollectionViewDelegate, UIColle
             let components = string.componentsSeparatedByCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
             let filtered = components.filter({!$0.isEmpty})
             let response = filtered.joinWithSeparator(" ")
-            let test = String(response.characters.filter { !" \n\t\r".characters.contains($0) })
+            let test = String(response.characters.filter { !AppConstants.escapeCharacters.characters.contains($0) })
             return test
     }
     
